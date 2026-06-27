@@ -1,12 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/common';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
+
+const scrollToHash = (hash: string) => {
+  const id = hash.replace('#', '');
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 export const Header: React.FC = () => {
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    if (location.hash) {
+      setTimeout(() => scrollToHash(location.hash), 100);
+    }
+  }, [location]);
 
   const handleLogout = async () => {
     try {
@@ -17,102 +39,118 @@ export const Header: React.FC = () => {
     }
   };
 
-  return (
-    <header className="bg-gradient-to-r from-secondary via-slate-900 to-secondary border-b border-gray-700/50 sticky top-0 z-40 backdrop-blur-md bg-opacity-95 shadow-lg shadow-black/50">
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-accent to-cyan-400 bg-clip-text text-transparent hover:from-cyan-400 hover:to-green-400 transition-all duration-300 hover:scale-110">
-          Portfolio
-        </Link>
+  const handleNavClick = (e: React.MouseEvent, hash: string) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate(`/${hash}`);
+    } else {
+      scrollToHash(hash);
+    }
+    setIsMenuOpen(false);
+  };
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link to="/" className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium relative group">
-            Home
-            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-cyan-400 group-hover:w-full transition-all duration-300"></div>
-          </Link>
-          <Link to="/#about" className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium relative group">
-            About
-            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-cyan-400 group-hover:w-full transition-all duration-300"></div>
-          </Link>
-          <Link to="/#portfolio" className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium relative group">
-            Portfolio
-            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-cyan-400 group-hover:w-full transition-all duration-300"></div>
-          </Link>
-          <Link to="/#contact" className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium relative group">
-            Contact
-            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-cyan-400 group-hover:w-full transition-all duration-300"></div>
-          </Link>
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const navLinks = [
+    { hash: '', label: 'Home', onClick: handleHomeClick },
+    { hash: '#about', label: 'About' },
+    { hash: '#portfolio', label: 'Portfolio' },
+    { hash: '#contact', label: 'Contact' },
+  ];
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled ? 'glass shadow-xl shadow-black/20 border-b border-white/5' : 'bg-transparent'
+    }`}>
+      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+        <a href="/" onClick={handleHomeClick} className="group flex items-center gap-2 relative">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-cyan-400 flex items-center justify-center shadow-lg shadow-accent/30 group-hover:shadow-accent/50 group-hover:scale-110 transition-all duration-500">
+            <Sparkles size={20} className="text-white" />
+          </div>
+          <span className="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Hasibul
+          </span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            link.onClick ? (
+              <a key={link.label} href="/" onClick={link.onClick} className="link-underline px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5 cursor-pointer">
+                {link.label}
+              </a>
+            ) : (
+              <a key={link.label} href={`/${link.hash}`} onClick={(e) => handleNavClick(e, link.hash)} className="link-underline px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5 cursor-pointer">
+                {link.label}
+              </a>
+            )
+          ))}
+
           {user ? (
-            <>
-              <Link to="/admin" className="text-gray-300 hover:text-accent transition-colors duration-300 font-medium relative group">
-                Admin
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+            <div className="flex items-center gap-3 ml-4">
+              <Link to="/admin" className="link-underline px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5">
+                Dashboard
               </Link>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleLogout}
-                className="hover:shadow-lg hover:shadow-accent/30"
-              >
+              <Button variant="secondary" size="sm" onClick={handleLogout}>
                 Logout
               </Button>
-            </>
+            </div>
           ) : (
-            <Link to="/admin/login">
-              <Button variant="primary" size="sm" className="hover:shadow-lg hover:shadow-accent/50">
+            <Link to="/admin/login" className="ml-4">
+              <Button variant="primary" size="sm">
                 Login
               </Button>
             </Link>
           )}
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-300 hover:text-accent transition-all duration-300 transform hover:scale-110"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button className="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-gradient-to-b from-primary to-slate-900 border-t border-gray-700/50 px-4 py-4 space-y-4 animate-slideDown">
-          <Link to="/" className="block text-gray-300 hover:text-accent transition-colors font-medium py-2">
-            Home
-          </Link>
-          <Link to="/#about" className="block text-gray-300 hover:text-accent transition-colors font-medium py-2">
-            About
-          </Link>
-          <Link to="/#portfolio" className="block text-gray-300 hover:text-accent transition-colors font-medium py-2">
-            Portfolio
-          </Link>
-          <Link to="/#contact" className="block text-gray-300 hover:text-accent transition-colors font-medium py-2">
-            Contact
-          </Link>
-          {user ? (
-            <>
-              <Link to="/admin" className="block text-gray-300 hover:text-accent transition-colors font-medium py-2">
-                Admin
+      <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+        isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      }`}>
+        <div className="glass border-t border-white/5 px-4 py-6 space-y-2">
+          {navLinks.map((link) => (
+            link.onClick ? (
+              <a key={link.label} href="/" onClick={link.onClick} className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 font-medium cursor-pointer">
+                {link.label}
+              </a>
+            ) : (
+              <a key={link.label} href={`/${link.hash}`} onClick={(e) => handleNavClick(e, link.hash)} className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 font-medium cursor-pointer">
+                {link.label}
+              </a>
+            )
+          ))}
+          <div className="pt-4 border-t border-white/5">
+            {user ? (
+              <div className="space-y-2">
+                <Link to="/admin" className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all font-medium">
+                  Dashboard
+                </Link>
+                <Button variant="secondary" size="sm" onClick={handleLogout} className="w-full">
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Link to="/admin/login" className="block">
+                <Button variant="primary" size="sm" className="w-full">
+                  Login
+                </Button>
               </Link>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleLogout}
-                className="w-full"
-              >
-                Logout
-              </Button>
-            </>
-          ) : (
-            <Link to="/admin/login" className="block">
-              <Button variant="primary" size="sm" className="w-full">
-                Login
-              </Button>
-            </Link>
-          )}
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

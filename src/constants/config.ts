@@ -1,19 +1,19 @@
 // Site constants
-export const SITE_NAME = 'Portfolio';
-export const SITE_DESCRIPTION = 'Professional Web Designer Portfolio';
-export const SITE_URL = (import.meta as any).env.PROD ? 'https://yourportfolio.com' : 'http://localhost:3000';
+export const SITE_NAME = 'Hasibul Hassan | Web Designer';
+export const SITE_DESCRIPTION = 'Professional Web Designer & Developer Portfolio';
+export const SITE_URL = (import.meta as any).env.PROD ? 'https://hasibul-hassan.vercel.app' : 'http://localhost:5173';
 
 // Social links
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com',
   linkedin: 'https://linkedin.com',
-  github: 'https://github.com',
+  github: 'https://github.com/shanto812',
   instagram: 'https://instagram.com',
 };
 
 // Contact
-export const CONTACT_EMAIL = 'your-email@example.com';
-export const WHATSAPP_NUMBER = '+1234567890'; // Replace with your WhatsApp number
+export const CONTACT_EMAIL = 'hasibul@example.com';
+export const WHATSAPP_NUMBER = '+8801234567890';
 
 // Portfolio sectors
 export const PORTFOLIO_SECTORS = [
@@ -25,12 +25,33 @@ export const PORTFOLIO_SECTORS = [
   { id: 'creative', name: 'Creative', slug: 'creative' },
 ];
 
-// Technologies/Skills
+// Technologies/Skills with proficiency levels
 export const SKILLS = {
-  design: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator'],
-  frontend: ['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Vue.js'],
-  backend: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
-  tools: ['Vercel', 'GitHub', 'Supabase', 'Firebase'],
+  design: [
+    { name: 'Figma', level: 90 },
+    { name: 'Adobe XD', level: 85 },
+    { name: 'Photoshop', level: 80 },
+    { name: 'Illustrator', level: 75 },
+  ],
+  frontend: [
+    { name: 'React', level: 92 },
+    { name: 'TypeScript', level: 85 },
+    { name: 'Tailwind CSS', level: 95 },
+    { name: 'Next.js', level: 80 },
+    { name: 'Vue.js', level: 70 },
+  ],
+  backend: [
+    { name: 'Node.js', level: 82 },
+    { name: 'Express', level: 78 },
+    { name: 'PostgreSQL', level: 72 },
+    { name: 'MongoDB', level: 75 },
+  ],
+  tools: [
+    { name: 'Git & GitHub', level: 88 },
+    { name: 'Vercel', level: 90 },
+    { name: 'Supabase', level: 80 },
+    { name: 'Firebase', level: 75 },
+  ],
 };
 
 // Form validation
