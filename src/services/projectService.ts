@@ -10,7 +10,7 @@ export const projectService = {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return (data || []).map(project => ({
+    return (data || []).map((project: any) => ({
       id: project.id,
       title: project.title,
       description: project.description,
@@ -34,7 +34,7 @@ export const projectService = {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return (data || []).map(project => ({
+    return (data || []).map((project: any) => ({
       id: project.id,
       title: project.title,
       description: project.description,
@@ -136,7 +136,9 @@ export const projectService = {
 
   // Update project
   updateProject: async (id: string, projectData: ProjectFormData): Promise<Project> => {
-    let imageUrl = projectData.liveLink; // Using liveLink as placeholder since we don't have current image URL here
+    // First fetch current project to preserve existing image if no new one is uploaded
+    const currentProject = await projectService.fetchProject(id);
+    let imageUrl = currentProject.imageUrl;
 
     if (projectData.image) {
       imageUrl = await projectService.uploadProjectImage(projectData.image, id);
@@ -149,7 +151,7 @@ export const projectService = {
         description: projectData.description,
         short_description: projectData.shortDescription,
         sector: projectData.sector,
-        ...(imageUrl && { image_url: imageUrl }),
+        image_url: imageUrl,
         live_link: projectData.liveLink,
         code_link: projectData.codeLink || null,
         technologies: projectData.technologies,
