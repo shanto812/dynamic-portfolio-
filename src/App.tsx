@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import { ProjectsProvider } from '@/context/ProjectsContext';
 import { Header, Footer, WhatsAppButton } from '@/components/layout';
@@ -8,49 +8,58 @@ import { AdminLoginPage } from '@/pages/admin/LoginPage';
 import { AdminDashboardPage } from '@/pages/admin/DashboardPage';
 import '@/styles/globals.css';
 
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  return (
+    <div className="min-h-screen flex flex-col bg-primary text-gray-100">
+      {!isAdminRoute && <Header />}
+      <main className="flex-1">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<HomePage />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboardPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* 404 */}
+          <Route
+            path="*"
+            element={
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-6xl font-bold text-accent mb-4">404</h1>
+                  <p className="text-gray-400 mb-8">Page not found</p>
+                  <a href="/" className="btn btn-primary">
+                    Go Home
+                  </a>
+                </div>
+              </div>
+            }
+          />
+        </Routes>
+      </main>
+      {!isAdminRoute && <WhatsAppButton />}
+      {!isAdminRoute && <Footer />}
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <AuthProvider>
         <ProjectsProvider>
-          <div className="min-h-screen flex flex-col bg-primary text-gray-100">
-            <Header />
-            <main className="flex-1">
-              <Routes>
-                {/* Public Routes */}
-                <Route path="/" element={<HomePage />} />
-
-                {/* Admin Routes */}
-                <Route path="/admin/login" element={<AdminLoginPage />} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboardPage />
-                    </ProtectedRoute>
-                  }
-                />
-
-                {/* 404 */}
-                <Route
-                  path="*"
-                  element={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="text-center">
-                        <h1 className="text-6xl font-bold text-accent mb-4">404</h1>
-                        <p className="text-gray-400 mb-8">Page not found</p>
-                        <a href="/" className="btn btn-primary">
-                          Go Home
-                        </a>
-                      </div>
-                    </div>
-                  }
-                />
-              </Routes>
-            </main>
-            <WhatsAppButton />
-            <Footer />
-          </div>
+          <AppContent />
         </ProjectsProvider>
       </AuthProvider>
     </Router>
