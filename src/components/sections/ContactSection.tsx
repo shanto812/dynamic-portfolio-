@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, Textarea } from '@/components/common';
 import { emailService } from '@/services/emailService';
 import { isValidEmail } from '@/utils/helpers';
-import { CONTACT_EMAIL } from '@/constants/config';
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, WHATSAPP_NUMBER } from '@/constants/config';
 import { Mail, CheckCircle, AlertCircle, Send, Phone, MapPin } from 'lucide-react';
 import { useScrollReveal } from '@/hooks';
 import type { ContactFormData } from '@/types';
@@ -82,7 +82,7 @@ export const ContactSection: React.FC = () => {
 
   const contactCards = [
     { icon: Mail, title: 'Email', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, color: 'from-accent to-cyan-400' },
-    { icon: Phone, title: 'WhatsApp', value: 'Chat with me', href: `https://wa.me/${'+8801234567890'.replace(/\D/g, '')}`, color: 'from-green-400 to-emerald-400' },
+    { icon: Phone, title: 'WhatsApp', value: CONTACT_PHONE_DISPLAY, href: `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, '')}`, color: 'from-green-400 to-emerald-400' },
     { icon: MapPin, title: 'Location', value: 'Bangladesh', href: '#', color: 'from-purple-400 to-pink-400' },
   ];
 
@@ -152,8 +152,8 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 font-medium">Or call/WhatsApp</p>
-                  <a href={`https://wa.me/${'+8801234567890'.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-green-400 transition-colors text-sm">
-                    +880 1234 567890
+                  <a href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-green-400 transition-colors text-sm">
+                    {CONTACT_PHONE_DISPLAY}
                   </a>
                 </div>
               </div>

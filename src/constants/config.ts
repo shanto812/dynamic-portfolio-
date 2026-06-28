@@ -6,14 +6,20 @@ export const SITE_URL = (import.meta as any).env.PROD ? 'https://hasibul-hassan.
 // Social links
 export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com',
-  linkedin: 'https://linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/hasibul-hassan-shanto-b671b1361/',
   github: 'https://github.com/shanto812',
   instagram: 'https://instagram.com',
+  facebook: 'https://www.facebook.com/hashibul.hassan.shanto.2024/',
 };
 
 // Contact
-export const CONTACT_EMAIL = 'hasibul@example.com';
-export const WHATSAPP_NUMBER = '+8801234567890';
+export const CONTACT_EMAIL = 'hasibulhassan.info@gmail.com';
+export const WHATSAPP_NUMBER = '+8801909419879';
+export const CONTACT_PHONE_DISPLAY = '+880 1909-419879';
+
+// Personal
+export const NICKNAME = 'SHANTO';
+export const HERO_IMAGE = 'https://images.unsplash.com/photo-1507036066871-b7e8032b3dea?w=800&auto=format&fit=crop';
 
 // Portfolio sectors
 export const PORTFOLIO_SECTORS = [
