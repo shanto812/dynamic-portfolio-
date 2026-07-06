@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
       <div className="absolute top-0 left-1/4 w-[450px] h-[450px] bg-[#FD1D1D]/5 rounded-full blur-[140px] pointer-events-none mix-blend-screen" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#FCB045]/5 rounded-full blur-[140px] pointer-events-none mix-blend-screen" />
 
-      <div className="relative z-10 max-w-[1750px] mx-auto px-4 md:px-8">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-4 md:px-8">
         
         {/* সেকশন ১: মিনিমাল হেডিং ও মেগা কল-টু-অ্যাকশন */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-20">

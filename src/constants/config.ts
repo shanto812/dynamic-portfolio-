@@ -34,21 +34,20 @@ export const PORTFOLIO_SECTORS = [
 // Technologies/Skills with proficiency levels
 export const SKILLS = {
   design: [
-    { name: 'Figma', level: 90 },
-    { name: 'Adobe XD', level: 85 },
+    { name: 'Canva', level: 90 },
     { name: 'Photoshop', level: 80 },
-    { name: 'Illustrator', level: 75 },
+    { name: 'Illustrator', level: 70 },
   ],
   frontend: [
     { name: 'React', level: 92 },
     { name: 'TypeScript', level: 85 },
     { name: 'Tailwind CSS', level: 95 },
-    { name: 'Next.js', level: 80 },
-    { name: 'Vue.js', level: 70 },
+    { name: 'HTML5', level: 90 },
+    { name: 'CSS', level: 90 },
   ],
   backend: [
-    { name: 'Node.js', level: 82 },
-    { name: 'Express', level: 78 },
+    { name: 'Python', level: 82 },
+    { name: 'php', level: 78 },
     { name: 'PostgreSQL', level: 72 },
     { name: 'MongoDB', level: 75 },
   ],

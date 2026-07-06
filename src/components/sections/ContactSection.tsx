@@ -94,7 +94,7 @@ export const ContactSection: React.FC = () => {
       <div className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-gradient-to-bl from-[#FCB045]/5 to-transparent rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#040404_90%)] pointer-events-none" />
 
-      <div className="max-w-[1750px] mx-auto relative z-10">
+      <div className="max-w-[1700px] mx-auto relative z-10">
         
         {/* Section Header with Dynamic Asymmetric Reveal */}
         <div ref={ref} className={`mb-24 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

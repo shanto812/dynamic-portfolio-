@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/common';
 import { ArrowRight, Send, Sparkles, Code2, Palette, Rocket, Github, Linkedin, Facebook } from 'lucide-react';
-import { HERO_IMAGE, SOCIAL_LINKS } from '@/constants/config';
+import { SOCIAL_LINKS } from '@/constants/config';
+import mainImg from '@/image/main.png'; // Imported your signature image file directly from the image folder
 
 const TYPING_WORDS = ['Web Designer', 'UI/UX Creator', 'Frontend Dev', 'Problem Solver'];
 
@@ -16,7 +17,7 @@ const FloatingParticle: React.FC<{ delay: number; size: number; left: number; du
       backgroundColor: '#FCB045',
       opacity: 0.15,
       position: 'absolute',
-      borderRadius: '2px', // স্লিক স্কয়ার পার্টিকেল
+      borderRadius: '2px', // Sleek square particle design
       animationDelay: `${delay}s`,
       animationDuration: `${duration}s`,
     }}
@@ -74,7 +75,7 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section className="min-h-screen relative flex items-center px-4 py-24 overflow-hidden bg-[#050505]">
-      {/* ওয়াম ফায়ার ডার্ক অ্যাম্বিয়েন্ট ব্যাকগ্রাউন্ড */}
+      {/* Warm Fire Dark Ambient Background Glows */}
       <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#FD1D1D]/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#FCB045]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute inset-0 grid-bg opacity-15" />
@@ -83,12 +84,12 @@ export const HeroSection: React.FC = () => {
         <FloatingParticle key={p.id} {...p} />
       ))}
 
-      <div className="max-w-[1750px] mx-auto w-full relative z-10">
+      <div className="max-w-[1700px] mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* LEFT SIDE - TEXT CONTENT */}
           <div className="order-2 lg:order-1">
-            {/* Badge - চারপাশ থেকে হালকা কার্ভড */}
+            {/* Context Badge with Gentle Curvature */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-neutral-950 border border-neutral-900 mb-6 animate-fadeInDown">
               <Sparkles size={14} style={{ color: '#FCB045' }} className="animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-neutral-400">Available for Freelance</span>
@@ -126,7 +127,7 @@ export const HeroSection: React.FC = () => {
               experiences that captivate users and elevate brands.
             </p>
 
-            {/* CTA Buttons - থিম কাস্টমাইজড */}
+            {/* CTA Buttons with Custom Theme Styles */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
               <button onClick={scrollToPortfolio} className="w-full sm:w-auto">
                 <Button variant="primary" size="lg" className="w-full group text-base !bg-gradient-to-r from-[#FD1D1D] to-[#FCB045] border-0 text-white font-bold rounded-xl shadow-lg shadow-[#FD1D1D]/10">
@@ -165,30 +166,30 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE - NEW CYBERPUNK BENTO BOX IMAGE FRAME */}
+          {/* RIGHT SIDE - CYBERPUNK BENTO BOX IMAGE FRAME */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
             <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px]">
               
-              {/* ব্যাকগ্রাউন্ড অ্যাম্বিয়েন্ট আভা */}
+              {/* Background Ambient Aura Glow */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#FD1D1D] to-[#FCB045] opacity-20 blur-2xl" />
 
-              {/* ইউনিক নিয়ন টেক ফ্রেম (Sharp Corners / Corner Accents) */}
+              {/* Unique Neon Tech Frame with Sharp Corner Accents */}
               <div className="absolute inset-[-8px] rounded-3xl border border-neutral-900 p-2" />
               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#FD1D1D] rounded-tl-3xl" />
               <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#FCB045] rounded-br-3xl" />
 
-              {/* Main Image Container - Sleek Card Shape (Rounded-3xl) */}
+              {/* Main Image Container - Sleek Rounded-3xl Card Shape */}
               <div className="relative w-full h-full rounded-3xl p-[1.5px] bg-gradient-to-br from-[#FD1D1D] to-[#FCB045] shadow-2xl shadow-black">
                 <div className="w-full h-full rounded-3xl overflow-hidden bg-neutral-950 relative">
                   <img
-                    src={HERO_IMAGE}
-                    alt="Hasibul Hassan"
+                    src={mainImg}
+                    alt="Hasibul Hassan Shanto"
                     className="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-105"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
-                  {/* Image Fail Fallback টেক্সট গ্রাডিয়েন্ট */}
+                  {/* Image Fail Fallback Text Gradient */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <span
                       className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#FD1D1D]/20 to-[#FCB045]/20"
@@ -197,12 +198,12 @@ export const HeroSection: React.FC = () => {
                       H
                     </span>
                   </div>
-                  {/* ওভারলে প্রো-টোন ফিল্টার */}
+                  {/* Overlaid Pro-Tone Filter */}
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[#FD1D1D]/5 via-transparent to-[#FCB045]/5 mix-blend-color-burn" />
                 </div>
               </div>
 
-              {/* Floating Tech Skill Badges - চারকোনা গ্লাস স্টাইল */}
+              {/* Floating Tech Skill Badges - Square Glass Style */}
               <div className="hidden lg:flex absolute -left-6 top-1/4 w-12 h-12 rounded-xl bg-neutral-950 border border-neutral-900 p-0.5 shadow-xl animate-float" style={{ animationDelay: '0.5s' }}>
                 <div className="w-full h-full rounded-xl bg-neutral-900/50 backdrop-blur-md flex items-center justify-center border border-white/5">
                   <Code2 size={20} className="text-[#FD1D1D]" />
@@ -223,12 +224,12 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Stats Bar - স্লিক স্ট্রেট বর্ডার লেআউট */}
+        {/* Stats Bar - Sleek Straight Border Layout */}
         <div className="grid grid-cols-3 gap-6 md:gap-12 mt-20 pt-10 border-t border-neutral-900 animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
           {[
-            { value: '50+', label: 'Projects Done' },
-            { value: '30+', label: 'Happy Clients' },
-            { value: '5+', label: 'Years Experience' },
+            { value: '10+', label: 'Projects Done' },
+            { value: '5+', label: 'Happy Clients' },
+            { value: '3+', label: 'Years Experience' },
           ].map(({ value, label }) => (
             <div key={label} className="group cursor-pointer text-center lg:text-left">
               <p

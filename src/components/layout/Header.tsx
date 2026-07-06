@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/common';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logoImg from '@/image/logo.png'; 
 
 const scrollToHash = (hash: string) => {
   const id = hash.replace('#', '');
@@ -69,28 +70,40 @@ export const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-500">
       
-      {/* 
-        এখানে পরিবর্তন করা হয়েছে: 
-        ১. ফুল পিল বাদ দিয়ে মডার্ন স্লিক কার্ড শেপ (rounded-2xl) করা হয়েছে।
-        ২. স্ক্রোল করলে আপনার দেওয়া কালার কোড অনুযায়ী বর্ডারে হালকা রিফ্লেকশন আসবে।
-      */}
-      <nav className={`max-w-[1750px] mx-auto px-6 py-3.5 flex items-center justify-between transition-all duration-500 rounded-2xl border backdrop-blur-md ${
+      {/* Modern navigation container bar with a sleek rounded-2xl profile */}
+      <nav className={`max-w-[1700px] mx-auto px-6 py-3.5 flex items-center justify-between transition-all duration-500 rounded-2xl border backdrop-blur-md ${
         scrolled 
           ? 'bg-neutral-950/80 border-[#FD1D1D]/20 shadow-xl shadow-black/40' 
           : 'bg-white/[0.02] border-white/5 shadow-sm'
       }`}>
         
-        {/* Logo - আপনার ২টা কাস্টম কালারের আকর্ষণীয় মিক্স */}
-        <a href="/" onClick={handleHomeClick} className="group flex items-center gap-2 relative">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FD1D1D] to-[#FCB045] flex items-center justify-center shadow-lg shadow-[#FD1D1D]/20 group-hover:scale-105 transition-all duration-500">
-            <Sparkles size={18} className="text-white" />
+        {/* Logo - Permanent Signature Gradient Design with Custom Asset Mark */}
+        <a href="/" onClick={handleHomeClick} className="group flex items-center gap-3 relative select-none">
+          {/* Geometric Custom Brand Icon Frame */}
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FD1D1D] via-[#FCB045] to-[#FD1D1D] bg-[length:200%_auto] p-[1.5px] shadow-lg shadow-[#FD1D1D]/10 group-hover:bg-[100%_center] group-hover:scale-[1.03] transition-all duration-700 ease-out">
+            <div className="w-full h-full rounded-[10px] bg-[#030303] flex items-center justify-center p-1.5 overflow-hidden">
+              <img 
+                src={logoImg} 
+                alt="Hasibul Hasan Shanto" 
+                className="w-full h-full object-contain transform group-hover:scale-105 group-hover:rotate-3 transition-transform duration-500" 
+              />
+            </div>
           </div>
-          <span className="text-lg font-bold text-white transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FD1D1D] group-hover:to-[#FCB045]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Hasibul
-          </span>
+
+          {/* Typography - Fluid Core Gradient */}
+          <div className="flex flex-col">
+            <span 
+              className="text-sm md:text-base font-black tracking-wide bg-gradient-to-r from-[#FD1D1D] via-[#FCB045] to-[#FD1D1D] bg-[length:200%_auto] bg-clip-text text-transparent group-hover:bg-[100%_center] transition-all duration-700 ease-out uppercase" 
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              Hasibul Hasan Shanto
+            </span>
+            {/* Minimal sub-line accent line */}
+            <div className="h-[2px] bg-gradient-to-r from-[#FD1D1D] to-transparent w-4 group-hover:w-full transition-all duration-500 mt-0.5 rounded-full" />
+          </div>
         </a>
 
-        {/* Desktop Menu - স্লিক ডিজাইন */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             link.onClick ? (

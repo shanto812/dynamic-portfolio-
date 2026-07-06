@@ -48,7 +48,7 @@ export const AboutSection: React.FC = () => {
   const { ref: containerRef, isVisible: sectionVisible } = useScrollReveal(0.05);
   const [selectedCategory, setSelectedCategory] = useState<'design' | 'frontend' | 'backend' | 'tools'>('design');
   
-  // কোন কার্ডটি এক্সপ্যান্ডেড থাকবে তা ট্র্যাক করার স্টেট (ডিফল্ট প্রথমটা খোলা থাকবে)
+  // Tracks the expanded state index of the profile highlight cards (defaults to the first payload active)
   const [expandedCard, setExpandedCard] = useState<number | null>(0);
 
   const profileHighlights = [
@@ -57,32 +57,32 @@ export const AboutSection: React.FC = () => {
       label: 'Identity', 
       title: 'Hasibul Hassan Shanto', 
       shortDesc: 'Computer Science Student & Visual Architect.',
-      detailedText: 'আমি কোডিং এবং ডিজাইনের মিশ্রণে ডিজিটাল ল্যান্ডস্কেপ তৈরি করতে ভালোবাসি। CSE ব্যাকগ্রাউন্ডের লজিক্যাল থিংকিং এবং ফ্রন্টএন্ড আর্কিটেকচারের ভিজ্যুয়াল আর্টকে একসাথে করে আমি ইউজার এক্সপেরিয়েন্সকে এক নতুন মাত্রায় নিয়ে যাই।',
-      aiInsight: 'Gemini Insight: শান্তর ইউজার ইন্টারফেস ডিজাইনের গভীরতা চমৎকার। সে এমন ইন্টারফেস তৈরি করতে পারে যা একই সাথে ফাস্ট এবং রেসপনসিভ।'
+      detailedText: 'Engineered at the intersection of logical computation and visual design. Leveraging a core CSE foundation, I design architectural frontend interfaces that transform clean layout parameters into ultra-fluid, human-centric visual art.',
+      aiInsight: 'Gemini Insight: Exhibits deep proficiency in UI composition. Calibrates interface mechanics to ensure fast execution speeds and high-fidelity adaptive properties.'
     },
     { 
       icon: Briefcase, 
       label: 'Operations', 
       title: 'Fullstack Execution', 
       shortDesc: 'Bridging user interfaces with structural backend logic.',
-      detailedText: 'শুধুমাত্র সুন্দর ডিজাইন নয়, ব্যাকএন্ডের আর্কিটেকচার নিয়েও আমি সমান পারদর্শী। ক্লায়েন্ট সাইড এবং সার্ভার সাইডের সুষম সমন্বয় ঘটিয়ে আমি হাই-পারফরম্যান্স ই-কমার্স ও ক্রিয়েটিভ পোর্টফোলিও মেকানিজম ডেভেলপ করি।',
-      aiInsight: 'Gemini Insight: কোডের অপটিমাইজেশন এবং ডেটা হ্যান্ডলিংয়ে তার মেথড খুবই স্লিক এবং স্ট্যান্ডার্ড-কমপ্লায়েন্ট।'
+      detailedText: 'Specialized in unified stack developments that transcend simple designs. Seamlessly integrates server-side computations with front-facing architectures to craft high-velocity e-commerce pipelines, automation systems, and modular digital solutions.',
+      aiInsight: 'Gemini Insight: Codebase refactoring methodologies and asynchronous stream allocations adhere to standard enterprise compliance.'
     },
     { 
       icon: Award, 
       label: 'Standard', 
       title: 'Pixel Precision Protocol', 
       shortDesc: 'Strict optimization rules for fluid performance.',
-      detailedText: 'প্রতিটি সেকশনে নিখুঁত পিক্সেল অ্যালাইনমেন্ট, অ্যাক্সেসিবিলিটি এবং রেসপনসিভনেস নিশ্চিত করা আমার কাজের প্রধান মূলমন্ত্র। লোডিং স্পিড এবং ক্লিন কোডবেস বজায় রাখতে আমি কোনো আপস করি না।',
-      aiInsight: 'Gemini Insight: UI কিউবেশন এবং গ্রিড বেন্টো এলাইনমেন্ট লেআউটে সে অসাধারণ পারফেকশনিস্ট।'
+      detailedText: 'Enforces absolute pixel boundaries, accessibility protocols, and cross-platform fidelity layouts. Rejects engineering shortcuts to secure clean, lightning-fast rendering indexes and optimal search engine positioning benchmarks.',
+      aiInsight: 'Gemini Insight: Exceptional layout purist with deep structural mastery over modern bento layouts and asymmetric interface distributions.'
     },
     { 
       icon: Heart, 
       label: 'Community', 
       title: 'Neural Network & Trends', 
       shortDesc: 'Exploring advanced gaming aesthetics and open source.',
-      detailedText: 'আমি সবসময় টেক ট্রেন্ড আপগ্রেডেশনের মধ্যে থাকি। ডিজিটাল এজেন্সির ব্র্যান্ডিং ডিজাইন, প্রফেশনাল গেমিং ইউটিলিটি গ্রাফিক্স এক্সপ্লোর করা এবং ওপেন-সোর্স কমিউনিটিতে অবদান রাখা আমার কাজের বাইরের সবচেয়ে বড় অনুপ্রেরণা।',
-      aiInsight: 'Gemini Insight: তার ভিজ্যুয়াল এস্থেটিক্সে গেমিং ও ফিউচারিস্টিক ট্রেন্ডের একটি দারুণ ইনফ্লুয়েন্স পাওয়া যায়।'
+      detailedText: 'Constantly tracking shifting tech horizons. Exploring high-end eSports branding dynamics, constructing design assets for modern agencies, and scaling collaborative open-source packages are the primary core engines powering my technical evolution.',
+      aiInsight: 'Gemini Insight: Infuses layouts with unique cinematic shadows and high-octane cyberpunk aesthetics derived from active digital creation.'
     },
   ];
 
@@ -110,9 +110,9 @@ export const AboutSection: React.FC = () => {
         }
       `}</style>
 
-      <div className="max-w-[1750px] mx-auto relative z-10">
+      <div className="max-w-[1700px] mx-auto relative z-10">
         
-        {/* হেডার */}
+        {/* Section Header */}
         <div className={`mb-16 border-b border-neutral-900 pb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition-all duration-700 ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div>
             <span className="text-[10px] font-mono tracking-[0.25em] block mb-2" style={{ color: '#FD1D1D' }}>[ ENGINE_INTERFACE // 2026 ]</span>
@@ -126,10 +126,10 @@ export const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        {/* মেইন ইন্টারঅ্যাক্টিভ গ্রিড লেআউট */}
+        {/* Core Interactive Layout Hub */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           
-          {/* বাম পাশ: কলাপ্সিবল অ্যাকোর্ডিয়ন কার্ড (৫ কলাম) */}
+          {/* LEFT SIDE - Collapsible Accordion Array (5-Column Layout Width) */}
           <div className="lg:col-span-5 space-y-3">
             {profileHighlights.map((item, idx) => {
               const Icon = item.icon;
@@ -145,7 +145,7 @@ export const AboutSection: React.FC = () => {
                   } ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}
                   style={{ transitionDelay: `${idx * 60}ms` }}
                 >
-                  {/* কার্ডের ক্লিকেবল টপ ট্রিগার */}
+                  {/* Interactive Card Header Trigger */}
                   <button
                     onClick={() => setExpandedCard(isExpanded ? null : idx)}
                     className="w-full p-5 flex items-center justify-between gap-4 text-left cursor-pointer transition-colors"
@@ -167,7 +167,7 @@ export const AboutSection: React.FC = () => {
                     />
                   </button>
 
-                  {/* স্মুথ অ্যানিমেটেড এক্সপ্যান্ডেড কন্টেন্ট */}
+                  {/* Smooth Architectural Expand Wrapper */}
                   <div 
                     className="transition-all duration-500 ease-in-out overflow-hidden"
                     style={{ 
@@ -176,12 +176,12 @@ export const AboutSection: React.FC = () => {
                     }}
                   >
                     <div className="px-5 pb-5 pt-1 border-t border-neutral-900/50 space-y-4">
-                      {/* বিস্তারিত বাংলা বিবরণী */}
+                      {/* Technical Breakdown Bio */}
                       <p className="text-xs text-neutral-400 leading-relaxed font-normal">
                         {item.detailedText}
                       </p>
                       
-                      {/* AI অ্যাসিস্ট্যান্ট ইন্সাইট বক্স (আপনার পছন্দের জন্য আলাদা ব্যাকগ্রাউন্ডসহ দেওয়া হলো) */}
+                      {/* AI Agent Insight Subsystem Shell */}
                       <div className="p-3 rounded-xl bg-[#070707] border border-neutral-900 text-[11px] font-mono text-neutral-400 leading-relaxed relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-1.5 h-full bg-gradient-to-b from-[#FD1D1D] to-[#FCB045]" />
                         <span className="text-[9px] font-bold uppercase tracking-widest text-[#FCB045] block mb-1">// AI_SYSTEM_FEED</span>
@@ -194,7 +194,7 @@ export const AboutSection: React.FC = () => {
             })}
           </div>
 
-          {/* ডান পাশ: স্কিল কন্ট্রোল প্যানেল (৭ কলাম) */}
+          {/* RIGHT SIDE - Skills Control Console Panel (7-Column Layout Width) */}
           <div className={`lg:col-span-7 rounded-3xl bg-neutral-950 border border-neutral-900 p-6 sm:p-8 relative transition-all duration-1000 ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div>
               <div className="flex flex-wrap gap-2 border-b border-neutral-900 pb-4 mb-6">
