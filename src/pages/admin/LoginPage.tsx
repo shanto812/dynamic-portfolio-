@@ -94,16 +94,7 @@ export const AdminLoginPage: React.FC = () => {
             </Button>
           </form>
 
-          {/* Demo Credentials Notice */}
-          <div className="mt-6 p-4 bg-blue-900 bg-opacity-20 border border-blue-700 rounded-lg">
-            <p className="text-blue-200 text-xs font-semibold mb-2">Demo Credentials</p>
-            <p className="text-blue-100 text-xs">
-              Email: <code className="bg-blue-900 px-2 py-1 rounded">admin@example.com</code>
-            </p>
-            <p className="text-blue-100 text-xs mt-1">
-              Password: <code className="bg-blue-900 px-2 py-1 rounded">password123</code>
-            </p>
-          </div>
+          
         </Card>
 
         {/* Footer */}
