@@ -12,14 +12,14 @@ export const PortfolioSection: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal(0.05);
 
-  // Triggers a high-tech scanning or glitch animation thrill whenever the selected sector changes
+  // Triggers a high-tech scanning animation whenever the selected sector changes
   useEffect(() => {
     setIsScanning(true);
     const timer = setTimeout(() => setIsScanning(false), 400);
     return () => clearTimeout(timer);
   }, [selectedSector]);
 
-  // Memoized filter optimizes client-side stream updates without breaking context states
+  // Filter logic
   const filteredProjects = useMemo(() => {
     return selectedSector === 'all'
       ? projects
@@ -27,7 +27,7 @@ export const PortfolioSection: React.FC = () => {
   }, [selectedSector, projects]);
 
   return (
-    <section id="portfolio" ref={sectionRef} className="relative bg-[#020202] py-28 px-4 overflow-hidden select-none">
+    <section id="portfolio" ref={sectionRef} className="relative bg-[#020202] py-24 px-4 overflow-hidden select-none">
       {/* 3D Digital Matrix and Laser Backdrop Overlay */}
       <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#FD1D1D_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
       <div className="absolute top-0 right-10 w-[350px] h-[350px] bg-[#FCB045]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
@@ -54,26 +54,26 @@ export const PortfolioSection: React.FC = () => {
       <div className="max-w-[1700px] mx-auto relative z-10">
         
         {/* Unique Space-Grade Header Layout */}
-        <div className={`mb-20 border-b border-neutral-900/60 pb-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 transition-all duration-1000 ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mb-16 border-b border-neutral-900/60 pb-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 transition-all duration-1000 ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Terminal size={14} style={{ color: '#FD1D1D' }} className="animate-pulse" />
               <span className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 uppercase">SYS_INDEX // DEPLOYMENTS</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               ARCHIVE // <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FD1D1D] via-[#FD1D1D] to-[#FCB045]">PROJ_FEED</span>
             </h2>
           </div>
           <div className="flex items-center gap-3 bg-[#070707] border border-neutral-900 px-4 py-2 rounded-xl font-mono text-[11px] text-neutral-400">
-            <Cpu size={14} style={{ color: '#FCB045' }} className="animate-spin-slow" />
-            <span>RENDER_MODE: ASYMMETRIC_GRID</span>
+            <Cpu size={14} style={{ color: '#FCB045' }} />
+            <span>RENDER_MODE: BENTO_GRID_MINI</span>
           </div>
         </div>
 
-        {/* Cyberpunk Sidebar Categories and Main Display Controls (2-Column Architecture) */}
+        {/* Cyberpunk Sidebar Categories and Main Display Controls */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           
-          {/* LEFT SIDE - Unique Vertical Glass Dock Controller (3-Column Width) */}
+          {/* LEFT SIDE - Vertical Controller Dock (3-Column Width) */}
           <div className={`lg:col-span-3 flex flex-col space-y-2 sticky top-24 transition-all duration-1000 delay-200 ${sectionVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <span className="text-[10px] font-mono font-bold tracking-wider text-neutral-600 uppercase px-3 mb-2 flex items-center gap-2">
               <Grid size={12} /> Filter Matrices
@@ -84,13 +84,13 @@ export const PortfolioSection: React.FC = () => {
                 <button
                   key={sector.id}
                   onClick={() => setSelectedSector(sector.slug)}
-                  className={`w-full px-4 py-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-left transition-all duration-300 relative group overflow-hidden border ${
+                  className={`w-full px-4 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-left transition-all duration-300 relative group overflow-hidden border ${
                     isActive
                       ? 'border-[#FD1D1D]/30 text-white shadow-xl shadow-[#FD1D1D]/5'
                       : 'border-neutral-900 bg-[#060606]/40 text-neutral-500 hover:text-neutral-300 hover:border-neutral-800'
                   }`}
                 >
-                  {/* Vertical Neon Indicator Bar on the Left for Active State */}
+                  {/* Vertical Neon Indicator Bar */}
                   {isActive && (
                     <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#FD1D1D] to-[#FCB045]" />
                   )}
@@ -113,8 +113,6 @@ export const PortfolioSection: React.FC = () => {
 
           {/* RIGHT SIDE - Real-Time Dynamic Project Showcase Layout (9-Column Width) */}
           <div className="lg:col-span-9 relative">
-            
-            {/* Running Overlay Scanning Effect During Matrix Filtering Upgrades */}
             <div className={`transition-all duration-300 relative ${isScanning ? 'matrix-scan min-h-[300px]' : ''}`}>
               
               {loading ? (
@@ -123,38 +121,29 @@ export const PortfolioSection: React.FC = () => {
                 </div>
               ) : filteredProjects.length > 0 ? (
                 
-                /* Asymmetric Neo-Bento Grid with structural stretched alignments */
-                <div className="grid sm:grid-cols-2 gap-6 items-stretch">
-                  {filteredProjects.map((project, idx) => {
-                    // Configures specific card items (the first one and every 3rd card afterward) with an expanded featured size
-                    const isFeature = idx === 0 || idx % 3 === 0;
-                    
-                    return (
-                      <div
-                        key={project.id}
-                        className={`group/item rounded-2xl border bg-[#050505] transition-all duration-700 hover:-translate-y-1.5 ${
-                          isFeature 
-                            ? 'sm:col-span-2 border-neutral-900/80 hover:border-[#FCB045]/30 shadow-xl shadow-black/80' 
-                            : 'border-neutral-900/60 hover:border-[#FD1D1D]/30'
-                        } ${
-                          sectionVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
-                        }`}
-                        style={{ 
-                          transitionDelay: `${100 + idx * 60}ms`
-                        }}
-                      >
-                        {/* Internal Wrapper: Preserves direct object data without state loss */}
-                        <div className="relative h-full overflow-hidden">
-                          {/* Minimal High-Tech Line Accents on Card Intersections */}
-                          <div className="absolute top-0 right-0 w-16 h-[1px] bg-gradient-to-r from-transparent to-neutral-800 group-hover/item:to-[#FCB045]/50 transition-colors z-20" />
-                          <div className="absolute bottom-0 left-0 w-[1px] h-16 bg-gradient-to-b from-transparent to-neutral-800 group-hover/item:to-[#FD1D1D]/50 transition-colors z-20" />
+                /* Compact Professional Grid: Multi-column structure prevents card bloated sizes */
+                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 items-stretch">
+                  {filteredProjects.map((project, idx) => (
+                    <div
+                      key={project.id}
+                      className={`group/item rounded-xl border bg-[#050505] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/50 border-neutral-900/70 hover:border-[#FD1D1D]/30 ${
+                        sectionVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
+                      }`}
+                      style={{ 
+                        transitionDelay: `${50 + idx * 40}ms`
+                      }}
+                    >
+                      {/* Internal Wrapper */}
+                      <div className="relative h-full overflow-hidden p-1">
+                        {/* High-Tech Accent Lines */}
+                        <div className="absolute top-0 right-0 w-12 h-[1px] bg-gradient-to-r from-transparent to-neutral-800 group-hover/item:to-[#FCB045]/40 transition-colors z-20" />
+                        <div className="absolute bottom-0 left-0 w-[1px] h-12 bg-gradient-to-b from-transparent to-neutral-800 group-hover/item:to-[#FD1D1D]/40 transition-colors z-20" />
 
-                          {/* Render Module Payload Call */}
-                          <ProjectCard project={project} />
-                        </div>
+                        {/* Render Project Card Module */}
+                        <ProjectCard project={project} />
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               ) : (
                 /* Fail-Safe Null Feed Dynamic State Interface */
