@@ -10,95 +10,99 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
-    <Card className="overflow-hidden flex flex-col h-full bg-[#050505] border border-neutral-900/80 rounded-xl group transition-all duration-500 hover:border-[#FD1D1D]/30 p-4 relative select-none">
+    <Card className="overflow-hidden flex flex-col h-full bg-gradient-to-br from-white/[0.04] to-transparent border-t border-l border-white/[0.12] border-r-transparent border-b-transparent rounded-tr-3xl rounded-bl-3xl rounded-tl-sm rounded-br-sm group transition-all duration-500 hover:border-t-[#FCB045]/40 hover:border-l-[#FD1D1D]/40 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9),0_0_40px_rgba(253,29,29,0.02)] backdrop-blur-xl p-5 relative select-none transform hover:-translate-y-1">
       
-      {/* Subtle reflective tech accent borders on corner hover intersections */}
-      <div className="absolute top-0 right-0 w-12 h-[1px] bg-gradient-to-r from-transparent to-neutral-800 group-hover:to-[#FCB045]/40 transition-colors duration-500" />
-      <div className="absolute bottom-0 left-0 w-[1px] h-12 bg-gradient-to-b from-transparent to-neutral-800 group-hover:to-[#FD1D1D]/40 transition-colors duration-500" />
+      {/* Dynamic Cyber Grid Mesh Accent Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:20px_20px] opacity-40 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      {/* Project Image with Slimmer Aspect Ratio for Professional Alignment */}
-      <div className="relative aspect-[16/9] max-h-40 w-full overflow-hidden rounded-lg bg-[#090909] border border-neutral-900/50 mb-4 shrink-0">
+      {/* Futuristic Index Corner Shield Badge */}
+      <div className="absolute top-0 left-0 bg-gradient-to-r from-[#FD1D1D] to-[#FCB045] h-[2px] w-8 group-hover:w-16 transition-all duration-500 rounded-full" />
+      <div className="absolute top-0 left-0 bg-gradient-to-b from-[#FD1D1D] to-[#FCB045] w-[2px] h-8 group-hover:h-16 transition-all duration-500 rounded-full" />
+
+      {/* Top Holographic Infrastructure Track Head */}
+      <div className="flex items-center justify-between mb-4 pb-2.5 border-b border-white/[0.04] font-mono text-[9px] text-neutral-500 tracking-widest uppercase">
+        <span className="group-hover:text-neutral-300 transition-colors">NODE // {project.sector}</span>
+        <span className="text-[#FCB045]/60 group-hover:text-[#FCB045] transition-colors font-semibold">PRJ-X01</span>
+      </div>
+
+      {/* Ultra-Slim Glass Wrapped Media Chamber */}
+      <div className="relative aspect-[21/9] w-full overflow-hidden rounded-tr-2xl rounded-bl-2xl rounded-tl-xs rounded-br-xs bg-black/40 border-t border-l border-white/[0.08] mb-4 shrink-0 shadow-2xl">
         <img
           src={project.imageUrl}
           alt={project.title}
-          className="w-full h-full object-cover scale-100 group-hover:scale-103 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         
-        {/* Luminescent dark ambient gradient overlay protection */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-        
-        {/* Category Badge: Minimalist and professional monospace formatting layout */}
-        <div className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-md text-neutral-400 border border-neutral-800/80 px-2 py-0.5 rounded text-[9px] font-mono tracking-widest uppercase transition-all duration-300 group-hover:border-[#FCB045]/40 group-hover:text-white z-10">
-          {project.sector}
-        </div>
+        {/* Cinematic High-Depth Shadow Mask Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040404] via-black/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity duration-500" />
       </div>
 
-      {/* Project Content Container - Flex Grow ensures proper layout distributions */}
-      <div className="flex-1 flex flex-col justify-between">
+      {/* Core Operational Text Body Wrapper */}
+      <div className="flex-1 flex flex-col justify-between relative z-10">
         
-        {/* Top Content: Title & Description */}
         <div>
-          {/* Title and Dynamic Kinetic Line */}
-          <div className="mb-2">
-            <h3 className="text-sm font-bold text-neutral-200 group-hover:text-white transition-colors duration-300 mb-1.5 tracking-wide line-clamp-1">
+          {/* Active Framework Line Indicator */}
+          <div className="mb-2 flex items-center gap-2">
+            <span className="w-1 h-3 rounded-full bg-gradient-to-b from-[#FD1D1D] to-[#FCB045]" />
+            <h3 className="text-sm font-bold tracking-wide text-neutral-200 group-hover:text-white transition-colors duration-300 antialiased line-clamp-1">
               {project.title}
             </h3>
-            {/* Signature Premium Gradient Split Line */}
-            <div className="h-[2px] bg-gradient-to-r from-[#FD1D1D] to-[#FCB045] w-5 group-hover:w-full transition-all duration-700 ease-out rounded-full" />
           </div>
 
-          {/* Description - Lower line clamp and min-height fixes vertical bloating */}
-          <p className="text-neutral-400 text-xs mb-4 leading-relaxed font-normal line-clamp-2 min-h-[2.5rem]">
+          {/* Micro-Printed Description */}
+          <p className="text-neutral-400 text-[11px] mb-5 leading-relaxed font-normal tracking-wide antialiased line-clamp-2 min-h-[2.5rem] pl-3 border-l border-white/[0.04]">
             {truncateString(project.shortDescription, 95)}
           </p>
         </div>
 
-        {/* Bottom Content: Technologies & Action Links */}
-        <div className="mt-auto">
-          {/* Technologies with Clean Code-Tag Styling */}
-          <div className="mb-4 flex flex-wrap gap-1 min-h-[24px] items-center">
+        {/* System Deployment Interaction Module */}
+        <div className="mt-auto space-y-4">
+          {/* Tech Nodes Wrapped in High-Contrast Capsule Tags */}
+          <div className="flex flex-wrap gap-1.5 min-h-[20px] items-center">
             {project.technologies.slice(0, 3).map((tech, idx) => (
               <span
                 key={tech}
-                className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#0a0a0a] border border-neutral-900 text-neutral-400 transition-all duration-300 group-hover:border-neutral-800 group-hover:text-neutral-300 whitespace-nowrap"
-                style={{ transitionDelay: `${idx * 30}ms` }}
+                className="text-[9px] font-mono tracking-wider px-2 py-0.5 rounded-tr-md rounded-bl-md bg-white/[0.02] border-t border-l border-white/[0.08] text-neutral-400 transition-all duration-300 group-hover:border-white/[0.18] group-hover:text-neutral-200"
+                style={{ transitionDelay: `${idx * 20}ms` }}
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 3 && (
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#110c08] border border-[#FCB045]/10 text-[#FCB045]/80 whitespace-nowrap">
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-[#1a0a03] border border-[#FCB045]/20 text-[#FCB045] font-bold">
                 +{project.technologies.length - 3}
               </span>
             )}
           </div>
 
-          {/* Links with Luxury Dual-Tone Interactions */}
-          <div className="flex gap-2.5 pt-3 border-t border-neutral-900/60 font-mono text-[11px] shrink-0">
+          {/* Floating Glass Control Terminal Dock */}
+          <div className="flex gap-2 p-1.5 rounded-xl bg-black/40 border border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.04)] font-mono text-[10px] shrink-0">
             
-            {/* Live Demo Button */}
+            {/* Live Terminal Portal */}
             <a
               href={project.liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 text-white py-2 rounded-lg font-bold tracking-wider relative overflow-hidden transition-all duration-500 hover:shadow-md hover:shadow-[#FD1D1D]/5 transform hover:-translate-y-0.5 active:translate-y-0"
+              className="flex-1 flex items-center justify-center gap-1.5 text-white py-1.5 rounded-lg font-bold tracking-widest relative overflow-hidden transition-all duration-500 hover:shadow-[0_0_20px_rgba(253,29,29,0.25)] transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               style={{
                 background: 'linear-gradient(135deg, #FD1D1D, #FCB045)'
               }}
             >
-              <ExternalLink size={12} />
+              {/* Kinetic light reflection scan */}
+              <div className="absolute inset-0 w-8 h-full bg-white/20 skew-x-[-30deg] -translate-x-12 group-hover:translate-x-44 transition-transform duration-1000 ease-in-out" />
+              <ExternalLink size={10} className="stroke-[2.5]" />
               <span>LIVE</span>
             </a>
 
-            {/* GitHub Code Button */}
+            {/* Repository Mirror Portal */}
             {project.codeLink && (
               <a
                 href={project.codeLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 bg-[#090909] border border-neutral-800 text-neutral-400 hover:text-white hover:border-[#FCB045]/30 py-2 rounded-lg transition-all duration-300 font-bold tracking-wider group/btn transform hover:-translate-y-0.5 active:translate-y-0"
+                className="flex-1 flex items-center justify-center gap-1.5 bg-white/[0.02] border border-white/[0.08] text-neutral-400 hover:text-white hover:bg-white/[0.05] hover:border-white/[0.2] py-1.5 rounded-lg transition-all duration-300 font-bold tracking-widest group/btn transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
-                <Github size={12} className="group-hover/btn:rotate-6 transition-transform duration-300" />
+                <Github size={10} className="group-hover/btn:scale-110 group-hover/btn:rotate-3 transition-all duration-300" />
                 <span>CODE</span>
               </a>
             )}

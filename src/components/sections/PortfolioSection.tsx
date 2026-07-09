@@ -12,14 +12,12 @@ export const PortfolioSection: React.FC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollReveal(0.05);
 
-  // Triggers a high-tech scanning animation whenever the selected sector changes
   useEffect(() => {
     setIsScanning(true);
     const timer = setTimeout(() => setIsScanning(false), 400);
     return () => clearTimeout(timer);
   }, [selectedSector]);
 
-  // Filter logic
   const filteredProjects = useMemo(() => {
     return selectedSector === 'all'
       ? projects
@@ -28,12 +26,10 @@ export const PortfolioSection: React.FC = () => {
 
   return (
     <section id="portfolio" ref={sectionRef} className="relative bg-[#020202] py-24 px-4 overflow-hidden select-none">
-      {/* 3D Digital Matrix and Laser Backdrop Overlay */}
       <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#FD1D1D_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
       <div className="absolute top-0 right-10 w-[350px] h-[350px] bg-[#FCB045]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-[#FD1D1D]/5 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Global Futuristic Scanner CSS Injection */}
       <style>{`
         @keyframes scanline {
           0% { transform: translateY(-100%); }
@@ -53,27 +49,27 @@ export const PortfolioSection: React.FC = () => {
 
       <div className="max-w-[1700px] mx-auto relative z-10">
         
-        {/* Unique Space-Grade Header Layout */}
+        {/* Section Header */}
         <div className={`mb-16 border-b border-neutral-900/60 pb-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 transition-all duration-1000 ${sectionVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Terminal size={14} style={{ color: '#FD1D1D' }} className="animate-pulse" />
-              <span className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 uppercase">SYS_INDEX // DEPLOYMENTS</span>
+              <span className="text-[10px] font-mono tracking-[0.3em] text-neutral-500 uppercase">System Index Deployment</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              ARCHIVE // <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FD1D1D] via-[#FD1D1D] to-[#FCB045]">PROJ_FEED</span>
+              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FD1D1D] via-[#FD1D1D] to-[#FCB045]">Projects</span>
             </h2>
           </div>
           <div className="flex items-center gap-3 bg-[#070707] border border-neutral-900 px-4 py-2 rounded-xl font-mono text-[11px] text-neutral-400">
             <Cpu size={14} style={{ color: '#FCB045' }} />
-            <span>RENDER_MODE: BENTO_GRID_MINI</span>
+            <span>Grid Layout Active</span>
           </div>
         </div>
 
-        {/* Cyberpunk Sidebar Categories and Main Display Controls */}
+        {/* Sidebar Categories and Controls */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           
-          {/* LEFT SIDE - Vertical Controller Dock (3-Column Width) */}
+          {/* LEFT SIDE - Filter Menu */}
           <div className={`lg:col-span-3 flex flex-col space-y-2 sticky top-24 transition-all duration-1000 delay-200 ${sectionVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <span className="text-[10px] font-mono font-bold tracking-wider text-neutral-600 uppercase px-3 mb-2 flex items-center gap-2">
               <Grid size={12} /> Filter Matrices
@@ -86,11 +82,10 @@ export const PortfolioSection: React.FC = () => {
                   onClick={() => setSelectedSector(sector.slug)}
                   className={`w-full px-4 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-left transition-all duration-300 relative group overflow-hidden border ${
                     isActive
-                      ? 'border-[#FD1D1D]/30 text-white shadow-xl shadow-[#FD1D1D]/5'
+                      ? 'border-[#FD1D1D]/30 text-white shadow-xl shadow-[#FD1D1D]/5 bg-neutral-900/40'
                       : 'border-neutral-900 bg-[#060606]/40 text-neutral-500 hover:text-neutral-300 hover:border-neutral-800'
                   }`}
                 >
-                  {/* Vertical Neon Indicator Bar */}
                   {isActive && (
                     <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#FD1D1D] to-[#FCB045]" />
                   )}
@@ -98,11 +93,10 @@ export const PortfolioSection: React.FC = () => {
                   <div className="flex justify-between items-center relative z-10">
                     <span>{sector.name}</span>
                     <span className="text-[9px] text-neutral-600 font-normal group-hover:text-neutral-400 transition-colors">
-                      {isActive ? '[ACTIVE]' : '//OPEN'}
+                      {isActive ? '[ACTIVE]' : 'OPEN'}
                     </span>
                   </div>
                   
-                  {/* Hover Background Ambient Glow Overlay */}
                   {!isActive && (
                     <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   )}
@@ -111,17 +105,16 @@ export const PortfolioSection: React.FC = () => {
             })}
           </div>
 
-          {/* RIGHT SIDE - Real-Time Dynamic Project Showcase Layout (9-Column Width) */}
+          {/* RIGHT SIDE - Project Showcase Grid */}
           <div className="lg:col-span-9 relative">
             <div className={`transition-all duration-300 relative ${isScanning ? 'matrix-scan min-h-[300px]' : ''}`}>
               
               {loading ? (
                 <div className="flex flex-col justify-center items-center min-h-[400px] bg-neutral-950/40 border border-neutral-900/60 rounded-2xl backdrop-blur-sm">
-                  <LoadingSpinner message="Decrypting project payloads..." />
+                  <LoadingSpinner message="Loading project parameters..." />
                 </div>
               ) : filteredProjects.length > 0 ? (
                 
-                /* Compact Professional Grid: Multi-column structure prevents card bloated sizes */
                 <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 items-stretch">
                   {filteredProjects.map((project, idx) => (
                     <div
@@ -133,29 +126,25 @@ export const PortfolioSection: React.FC = () => {
                         transitionDelay: `${50 + idx * 40}ms`
                       }}
                     >
-                      {/* Internal Wrapper */}
                       <div className="relative h-full overflow-hidden p-1">
-                        {/* High-Tech Accent Lines */}
                         <div className="absolute top-0 right-0 w-12 h-[1px] bg-gradient-to-r from-transparent to-neutral-800 group-hover/item:to-[#FCB045]/40 transition-colors z-20" />
                         <div className="absolute bottom-0 left-0 w-[1px] h-12 bg-gradient-to-b from-transparent to-neutral-800 group-hover/item:to-[#FD1D1D]/40 transition-colors z-20" />
 
-                        {/* Render Project Card Module */}
                         <ProjectCard project={project} />
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                /* Fail-Safe Null Feed Dynamic State Interface */
                 <div className="text-center py-24 bg-neutral-950/30 border border-neutral-900/60 rounded-3xl backdrop-blur-sm">
                   <div className="inline-block p-8 rounded-2xl bg-[#050505] border border-neutral-900 relative max-w-sm">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-[#FD1D1D] to-[#FCB045]" />
                     <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center">
                       <FolderGit2 size={20} className="text-neutral-600" />
                     </div>
-                    <h3 className="text-xs font-bold font-mono uppercase text-neutral-400 mb-1">DATA_STREAM_EMPTY</h3>
+                    <h3 className="text-xs font-bold font-mono uppercase text-neutral-400 mb-1">No Projects Found</h3>
                     <p className="text-neutral-500 text-[11px] font-mono leading-relaxed">
-                      No deployed artifacts match this specific sector code in the database feed.
+                      There are currently no deployed items inside this sector category.
                     </p>
                   </div>
                 </div>
