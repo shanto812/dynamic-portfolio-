@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { Button } from '@/components/common';
 import { Menu, X } from 'lucide-react';
 import logoImg from '@/image/logo.png'; 
+
 
 const scrollToHash = (hash: string) => {
   const id = hash.replace('#', '');
@@ -12,7 +12,8 @@ const scrollToHash = (hash: string) => {
 };
 
 export const Header: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -31,14 +32,7 @@ export const Header: React.FC = () => {
     }
   }, [location]);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  };
+
 
   const handleNavClick = (e: React.MouseEvent, hash: string) => {
     e.preventDefault();
@@ -138,10 +132,13 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Menu Toggle Button */}
-        <button className="md:hidden w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/5" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isOpen => (isMenuOpen ? <X size={20} /> : <Menu size={20} />)}
+        <button
+          className="md:hidden w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/5"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
+
       </nav>
 
       {/* Mobile Dropdown Menu */}

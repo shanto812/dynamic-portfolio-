@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import { SKILLS } from '@/constants/config';
 import { useScrollReveal } from '@/hooks';
 import { User, Award, Briefcase, Heart, Cpu, Activity, LayoutGrid, Layers, ChevronDown } from 'lucide-react';
