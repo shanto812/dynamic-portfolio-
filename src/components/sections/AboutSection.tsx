@@ -208,7 +208,7 @@ export const AboutSection: React.FC = () => {
             <div>
               {/* Category Toggles */}
               <div className="flex flex-wrap gap-2 border-b border-white/[0.06] pb-4 mb-6">
-                {(['design', 'frontend', 'backend', 'tools'] as const).map((tab) => (
+                {([ 'design', 'frontend', 'backend', 'tools' ] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => handleCategoryChange(tab)}

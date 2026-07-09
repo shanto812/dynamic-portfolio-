@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import { Menu, X } from 'lucide-react';
 import logoImg from '@/image/logo.png'; 
-
 
 const scrollToHash = (hash: string) => {
   const id = hash.replace('#', '');
@@ -12,8 +10,6 @@ const scrollToHash = (hash: string) => {
 };
 
 export const Header: React.FC = () => {
-  const { logout } = useAuth();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -31,8 +27,6 @@ export const Header: React.FC = () => {
       setTimeout(() => scrollToHash(location.hash), 100);
     }
   }, [location]);
-
-
 
   const handleNavClick = (e: React.MouseEvent, hash: string) => {
     e.preventDefault();
@@ -103,7 +97,7 @@ export const Header: React.FC = () => {
           </div>
         </a>
 
-        {/* Desktop Menu - (৩টি লিঙ্ক একসাথে একটি সিঙ্গেল ডার্ক ক্যাপসুলের ভেতর) */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center flex-1 justify-center">
           <div className="flex items-center gap-1 bg-neutral-900/60 border border-white/[0.04] p-1.5 rounded-full backdrop-blur-sm shadow-inner">
             {navLinks.map((link) => (
@@ -114,14 +108,13 @@ export const Header: React.FC = () => {
                 className="px-5 py-2 text-[14px] font-bold text-neutral-300 hover:text-white transition-all duration-200 rounded-full hover:bg-white/10 active:scale-95 cursor-pointer"
               >
                 {link.label}
-              </a>
+              {"}"}
             ))}
           </div>
         </div>
 
         {/* Desktop Right Actions */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Let’s Talk */}
           <a
             href="#contact"
             onClick={handleLetsTalk}
@@ -158,8 +151,6 @@ export const Header: React.FC = () => {
           ))}
 
           <div className="pt-3 mt-2 border-t border-neutral-900">
-            
-            {/* Let’s Talk (mobile) */}
             <a
               href="#contact"
               onClick={handleLetsTalk}
