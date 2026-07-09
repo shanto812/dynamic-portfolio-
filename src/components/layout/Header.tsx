@@ -108,9 +108,10 @@ export const Header: React.FC = () => {
                 className="px-5 py-2 text-[14px] font-bold text-neutral-300 hover:text-white transition-all duration-200 rounded-full hover:bg-white/10 active:scale-95 cursor-pointer"
               >
                 {link.label}
-              {"}"}
+              </a>
             ))}
           </div>
+
         </div>
 
         {/* Desktop Right Actions */}
